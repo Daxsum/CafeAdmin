@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import Axios from "axios";
 import { Card } from "@mantine/core";
+import DropDown from "../comm/dropdown";
 
 function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
   const id = selectedEmployee._id;
 
   const [name, setName] = useState(selectedEmployee.name);
-  const [location, setLocation] = useState(selectedEmployee.location);
-  const [email, setEmail] = useState(selectedEmployee.email);
-  const [phone, setPhone] = useState(selectedEmployee.phone);
-  const [speciality, setSpeciality] = useState(selectedEmployee.speciality);
+  const [typeId, setTypeId] = useState(selectedEmployee.typeId);
+  const [numberInStock, setNumberInStock] = useState(
+    selectedEmployee.numberInStock
+  );
+  const [price, setPrice] = useState(selectedEmployee.price);
+  const [file, setFile] = useState(selectedEmployee.file);
   // const [date, setDate] = useState(selectedEmployee.date);
   //
 
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    if (!name || !location || !email || !phone || !speciality) {
+    if (!name || !typeId || !price || !numberInStock) {
       return Swal.fire({
         icon: "error",
         title: "Error!",
@@ -29,10 +32,9 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
     const employee = {
       id,
       name,
-      location,
-      email,
-      phone,
-      speciality,
+      typeId,
+      numberInStock,
+      price,
     };
 
     for (let i = 0; i < employees.length; i++) {
@@ -50,7 +52,7 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       };
 
       Axios.put(
-        `http://localhost:5000/api/admin/hospital/${id}`,
+        `http://localhost:5000/api/products/Update/${id}`,
         employee,
         config
       );
@@ -67,57 +69,44 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       alert(error);
       setEmployees(orginalData);
     }
-    window.location.reload(false);
+    // window.location.reload(false);
   };
+  //   let optionItems = obj.array.map((item) =>
+  //   <option key={item}>{item}</option>
+  // );
 
   return (
     <div className="small-container">
       <br />
       <Card shadow="lg" radius="md" withBorder style={{ width: "700px" }}>
         <form onSubmit={handleUpdate}>
-          <h1 style={{ color: "#1976D2", fontWeight: "100" }}>
-            Edit Hospitals
-          </h1>
-          <label htmlFor="firstName">Name</label>
+          <h1 style={{ color: "#1976D2", fontWeight: "100" }}>Edit Foods</h1>
+          <label htmlFor="name">Name</label>
           <input
-            id="firstName"
+            id="name"
             type="text"
-            name="firstName"
+            name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="lastName">Location</label>
+          <DropDown />
+          <label htmlFor="numberInStock">numberInStock</label>
           <input
-            id="lastName"
-            type="text"
-            name="lastName"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            id="numberInStock"
+            type="numberInStock"
+            name="numberInStock"
+            value={numberInStock}
+            onChange={(e) => setNumberInStock(e.target.value)}
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="price">price</label>
           <input
-            id="email"
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            id="price"
+            type="number"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
           />
-          <label htmlFor="salary">Phone</label>
-          <input
-            id="salary"
-            type="tel"
-            name="salary"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <label htmlFor="salary">Speciality</label>
-          <input
-            id="salary"
-            type="text"
-            name="salary"
-            value={speciality}
-            onChange={(e) => setSpeciality(e.target.value)}
-          />
+          <label htmlFor="file">Speciality</label>
 
           <div style={{ marginTop: "30px" }}>
             <input

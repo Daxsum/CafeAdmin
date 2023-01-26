@@ -13,7 +13,7 @@ function Hospital() {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [parameter, setParameter] = useState("getAll");
-  console.log(localStorage.getItem("token"));
+
   useEffect(() => {
     let config = {
       headers: {
@@ -22,14 +22,13 @@ function Hospital() {
     };
     Axios.get("http://localhost:5000/api/products/getAll")
       .then(({ data }) => {
-        console.log(data);
         setEmployees(data);
       })
       .catch();
-  }, []);
+  });
   const handleEdit = (_id) => {
     const [employee] = employees.filter((employee) => employee._id === _id);
-    console.log(employee);
+
     setSelectedEmployee(employee);
     setIsEditing(true);
   };
@@ -58,7 +57,7 @@ function Hospital() {
 
         let config = {
           headers: {
-            Authorization: "Bearer " + sessionStorage.getItem("token"),
+            Authorization: sessionStorage.getItem("token"),
           },
         };
 
@@ -67,7 +66,6 @@ function Hospital() {
             `http://localhost:5000/api/admin/hospital/${id}`,
             config
           );
-          console.log(employee._id);
         } catch (error) {
           alert(error);
           setEmployees(orginalData);
@@ -93,8 +91,7 @@ function Hospital() {
     };
     Axios.get("http:/localhost:5000/api/products/getAll", config).then(
       (response) => {
-        console.log(response.data.data.data);
-        setEmployees(response.data.data.data);
+        setEmployees(response.data);
       }
     );
   };

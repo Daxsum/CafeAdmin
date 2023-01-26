@@ -9,14 +9,13 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
 
   const [name, setName] = useState(selectedEmployee.name);
   const [typeId, setTypeId] = useState(selectedEmployee.type.id);
-  console.log(selectedEmployee.type.id);
+
   const [numberInStock, setNumberInStock] = useState(
     selectedEmployee.numberInStock
   );
   const [price, setPrice] = useState(selectedEmployee.price);
   const [file, setFile] = useState(null);
-  // const [date, setDate] = useState(selectedEmployee.date);
-  //
+  const [alert, setAlert] = useState(false);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -37,7 +36,6 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       numberInStock,
       price,
     };
-    console.log(employee);
 
     for (let i = 0; i < employees.length; i++) {
       if (employees[i].id === id) {
@@ -48,21 +46,12 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
     const orginalData = employees;
 
     e.preventDefault();
-
-    // var myHeaders = new Headers();
-    // myHeaders.append("Authorization", sessionStorage.getItem("token"));
-    // myHeaders.append("Content-Type", "multipart/form-data");
-
-    console.log(sessionStorage.getItem("token"));
-
     var formdata = new FormData();
-
     formdata.append("name", name);
     formdata.append("typeId", typeId);
     formdata.append("numberInStock", numberInStock);
     formdata.append("price", price);
     formdata.append("file", file);
-
     var requestOptions = {
       method: "PUT",
       headers: {
@@ -71,31 +60,17 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       body: formdata,
       // redirect: "follow",
     };
-
     fetch(`http://localhost:5000/api/products/Update/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setEmployees(employees);
         setIsEditing(false);
-        Swal.fire({
-          icon: "success",
-          title: "Updated!",
-          text: `${employee.name} ${employee.price}'s data has been updated.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
       })
       .catch((error) => {
-        setError(error.config.message);
         setEmployees(orginalData);
         Swal.error("ops!", `${error.config.message}`, "please try again!");
       });
-
-    // window.location.reload(false);
   };
-  //   let optionItems = obj.array.map((item) =>
-  //   <option key={item}>{item}</option>
-  // );
 
   return (
     <div className="small-container">

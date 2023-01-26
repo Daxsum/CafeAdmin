@@ -44,9 +44,9 @@ function AdminLogin() {
     axios
       .post("http://localhost:5000/api/login", { userName, password })
       .then(function (response) {
-        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("token", response.data);
         navigate("/report");
-        // console.log(response.data.token);
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

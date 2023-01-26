@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import Axios from "axios";
+
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
 
@@ -8,19 +8,20 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
   const id = selectedEmployee._id;
 
   const [name, setName] = useState(selectedEmployee.name);
-  const [typeId, setTypeId] = useState(selectedEmployee.typeId);
+  const [typeId, setTypeId] = useState(selectedEmployee.type.id);
+  console.log(selectedEmployee.type.id);
   const [numberInStock, setNumberInStock] = useState(
     selectedEmployee.numberInStock
   );
   const [price, setPrice] = useState(selectedEmployee.price);
-  const [file, setFile] = useState(selectedEmployee.file);
+  const [file, setFile] = useState(null);
   // const [date, setDate] = useState(selectedEmployee.date);
   //
 
   const handleUpdate = (e) => {
     e.preventDefault();
 
-    if (!name || !typeId || !price || !numberInStock) {
+    if (!name || !price || !numberInStock) {
       return Swal.fire({
         icon: "error",
         title: "Error!",
@@ -36,6 +37,7 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       numberInStock,
       price,
     };
+    console.log(employee);
 
     for (let i = 0; i < employees.length; i++) {
       if (employees[i].id === id) {
@@ -43,32 +45,52 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
         break;
       }
     }
-    try {
-      const orginalData = employees;
-      let config = {
-        headers: {
-          Authorization: sessionStorage.getItem("token"),
-        },
-      };
+    const orginalData = employees;
 
-      Axios.put(
-        `http://localhost:5000/api/products/Update/${id}`,
-        employee,
-        config
-      );
-      setEmployees(employees);
-      setIsEditing(false);
-      Swal.fire({
-        icon: "success",
-        title: "Updated!",
-        text: `${employee.name} ${employee.location}'s data has been updated.`,
-        showConfirmButton: false,
-        timer: 1500,
+    e.preventDefault();
+
+    // var myHeaders = new Headers();
+    // myHeaders.append("Authorization", sessionStorage.getItem("token"));
+    // myHeaders.append("Content-Type", "multipart/form-data");
+
+    console.log(sessionStorage.getItem("token"));
+
+    var formdata = new FormData();
+
+    formdata.append("name", name);
+    formdata.append("typeId", typeId);
+    formdata.append("numberInStock", numberInStock);
+    formdata.append("price", price);
+    formdata.append("file", file);
+
+    var requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+      body: formdata,
+      // redirect: "follow",
+    };
+
+    fetch(`http://localhost:5000/api/products/Update/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setEmployees(employees);
+        setIsEditing(false);
+        Swal.fire({
+          icon: "success",
+          title: "Updated!",
+          text: `${employee.name} ${employee.price}'s data has been updated.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        setError(error.config.message);
+        setEmployees(orginalData);
+        Swal.error("ops!", `${error.config.message}`, "please try again!");
       });
-    } catch (error) {
-      alert(error);
-      setEmployees(orginalData);
-    }
+
     // window.location.reload(false);
   };
   //   let optionItems = obj.array.map((item) =>
@@ -81,33 +103,44 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       <Card shadow="lg" radius="md" withBorder style={{ width: "700px" }}>
         <form onSubmit={handleUpdate}>
           <h1 style={{ color: "#1976D2", fontWeight: "100" }}>Edit Foods</h1>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <DropDown />
-          <label htmlFor="numberInStock">numberInStock</label>
-          <input
-            id="numberInStock"
-            type="numberInStock"
-            name="numberInStock"
-            value={numberInStock}
-            onChange={(e) => setNumberInStock(e.target.value)}
-          />
-          <label htmlFor="price">price</label>
-          <input
-            id="price"
-            type="number"
-            name="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <label htmlFor="file">Speciality</label>
 
+          <span className=" md:flex lg:w-full  jestify-center space-x-2 ">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label htmlFor="numberInStock">numberInStock</label>
+            <input
+              id="numberInStock"
+              type="number"
+              name="numberInStock"
+              value={numberInStock}
+              onChange={(e) => setNumberInStock(e.target.value)}
+            />
+            <label htmlFor="price">price</label>
+            <input
+              id="price"
+              type="number"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </span>
+          <span className="md:flex space-x-4">
+            <label htmlFor="file">Upload Image</label>
+            <input
+              name="file"
+              type="file"
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+            />
+            <DropDown typeId={typeId} setTypeId={setTypeId} />
+          </span>
           <div style={{ marginTop: "30px" }}>
             <input
               className="btn bg-indigo-500 hover:bg-indigo-600 text-white"

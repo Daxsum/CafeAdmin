@@ -15,7 +15,6 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
   );
   const [price, setPrice] = useState(selectedEmployee.price);
   const [file, setFile] = useState(null);
-  const [alert, setAlert] = useState(false);
 
   const handleUpdate = (e) => {
     e.preventDefault();

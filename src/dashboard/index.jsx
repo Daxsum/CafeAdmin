@@ -6,6 +6,7 @@ import List from "./List";
 import Edit from "./Edit";
 import Axios from "axios";
 import Filter from "../partials/actions/filterOptions";
+import Add from "./Add";
 
 function Hospital() {
   const [employees, setEmployees] = useState({});
@@ -49,7 +50,7 @@ function Hospital() {
         Swal.fire({
           icon: "success",
           title: "Deleted!",
-          text: `${employee.name} ${employee.location}'s data has been deleted.`,
+          text: `${employee.name}'s data has been deleted.`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -63,7 +64,7 @@ function Hospital() {
 
         try {
           Axios.delete(
-            `http://localhost:5000/api/admin/hospital/${id}`,
+            `http://localhost:5000/api/products/Delete/${id}`,
             config
           );
         } catch (error) {
@@ -120,6 +121,13 @@ function Hospital() {
           selectedEmployee={selectedEmployee}
           setEmployees={setEmployees}
           setIsEditing={setIsEditing}
+        />
+      )}
+      {isAdding && (
+        <Add
+          setIsAdding={setIsAdding}
+          employees={employees}
+          setEmployees={setEmployees}
         />
       )}
     </div>

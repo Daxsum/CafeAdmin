@@ -1,45 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
 import Swal from "sweetalert2";
 import Axios from "axios";
+import { Card } from "@mantine/core";
+import DropDown from "../comm/dropdown";
 
-function Add({ setIsAdding }) {
-  const [employees, setEmployees] = useState({});
+function Add({ setIsAdding, employees, setEmployees }) {
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [speciality, setSpeciality] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-
-  const textInput = useRef(null);
-
-  useEffect(() => {
-    textInput.current.focus();
-    let config = {
-      headers: {
-        Authorization: "Bearer " + sessionStorage.getItem("token"),
-      },
-    };
-    Axios.get("http://localhost:5000/api/admin/hospital", config)
-      .then((response) => {
-        console.log(response.data.data.data);
-        setEmployees(response.data.data.data);
-      })
-      .catch();
-  }, []);
+  const [typeId, setTypeId] = useState("");
+  const [numberInStock, setNumberInStock] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [file, setFile] = useState(null);
 
   const handleAdd = (e) => {
     e.preventDefault();
-    if (
-      !name ||
-      !location ||
-      !email ||
-      !phone ||
-      !speciality ||
-      !password ||
-      !passwordConfirm
-    ) {
+
+    if (!name || !price || !numberInStock) {
       return Swal.fire({
         icon: "error",
         title: "Error!",
@@ -48,118 +23,101 @@ function Add({ setIsAdding }) {
       });
     }
 
-    const id = employees.length + 1;
-    const newEmployee = {
-      id,
+    const employee = {
       name,
-      location,
-      email,
-      phone,
-      speciality,
-      password,
-      passwordConfirm,
+      typeId,
+      numberInStock,
+      price,
     };
-    try {
-      let config = {
-        headers: {
-          Authorization: "Bearer " + sessionStorage.getItem("token"),
-        },
-      };
-
-      Axios.post(
-        `http://localhost:5000/api/admin/hospital`,
-        newEmployee,
-        config
-      );
-      console.log("inserted");
-    } catch (error) {
-      alert(error);
-    }
-    // employees.push(newEmployee);
-    setEmployees(employees);
-    setIsAdding(false);
-
-    Swal.fire({
-      icon: "success",
-      title: "Added!",
-      text: `${name} ${location}'s data has been created.`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    const orginalData = employees;
+    var formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("typeId", typeId);
+    formdata.append("numberInStock", numberInStock);
+    formdata.append("price", price);
+    formdata.append("file", file);
+    var requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+      body: formdata,
+      // redirect: "follow",
+    };
+    fetch("http://localhost:5000/api/products/Add", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setEmployees(employees);
+        setIsAdding(false);
+      })
+      .catch((error) => {
+        setEmployees(orginalData);
+        Swal.error("ops!", `${error.config.message}`, "please try again!");
+      });
   };
+
+  ////////////
 
   return (
     <div className="small-container">
-      <form onSubmit={handleAdd}>
-        <h1 style={{ color: "#1976D2", fontWeight: "100"}}>Add Hospitals</h1>
-        <label htmlFor="name">Name of Hospital</label>
-        <input
-          id="name"
-          type="text"
-          ref={textInput}
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="location">Location</label>
-        <input
-          id="location"
-          type="text"
-          name="location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="phone">Phone</label>
-        <input
-          id="phone"
-          type="tel"
-          name="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <label htmlFor="speciality">Speciality</label>
-        <input
-          id="speciality"
-          type="text"
-          name="speciality"
-          value={speciality}
-          onChange={(e) => setSpeciality(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="passwordConfirm">passwordConfirm</label>
-        <input
-          id="passwordConfirm"
-          type="password"
-          name="passwordConfirm"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-        />
-        <div style={{ marginTop: "30px" }}>
-          <input type="submit" value="Add" />
-          <input
-            style={{ marginLeft: "12px" }}
-            className="muted-button"
-            type="button"
-            value="Cancel"
-            onClick={() => setIsAdding(false)}
-          />
-        </div>
-      </form>
+      <br />
+      <Card shadow="lg" radius="md" withBorder style={{ width: "700px" }}>
+        <form onSubmit={handleAdd}>
+          <h1 style={{ color: "#1976D2", fontWeight: "100" }}>Add Foods</h1>
+
+          <span className=" md:flex lg:w-full  jestify-center space-x-2 ">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <label htmlFor="numberInStock">numberInStock</label>
+            <input
+              id="numberInStock"
+              type="number"
+              name="numberInStock"
+              value={numberInStock}
+              onChange={(e) => setNumberInStock(e.target.value)}
+            />
+            <label htmlFor="price">price</label>
+            <input
+              id="price"
+              type="number"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </span>
+          <span className="md:flex space-x-4">
+            <label htmlFor="file">Upload Image</label>
+            <input
+              name="file"
+              type="file"
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+            />
+            <DropDown typeId={typeId} setTypeId={setTypeId} />
+          </span>
+          <div style={{ marginTop: "30px" }}>
+            <input
+              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              type="submit"
+              value="Add"
+            />
+            <input
+              style={{ marginLeft: "12px" }}
+              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              type="button"
+              value="Cancel"
+              onClick={() => setIsAdding(false)}
+            />
+          </div>
+        </form>
+      </Card>
     </div>
   );
 }

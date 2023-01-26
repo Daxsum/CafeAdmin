@@ -76,7 +76,7 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       <br />
       <Card shadow="lg" radius="md" withBorder style={{ width: "700px" }}>
         <form onSubmit={handleUpdate}>
-          <h1 style={{ color: "#1976D2", fontWeight: "100" }}>Edit Foods</h1>
+          <h1 style={{ color: "#fc9403", fontWeight: "100" }}>Edit Foods</h1>
 
           <span className=" md:flex lg:w-full  jestify-center space-x-2 ">
             <label htmlFor="name">Name</label>
@@ -117,13 +117,13 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
           </span>
           <div style={{ marginTop: "30px" }}>
             <input
-              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              className="btn bg-orange-500 hover:bg-orange-600 text-white"
               type="submit"
               value="Update"
             />
             <input
               style={{ marginLeft: "12px" }}
-              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              className="btn bg-red-500 hover:bg-red-600 text-white"
               type="button"
               value="Cancel"
               onClick={() => setIsEditing(false)}

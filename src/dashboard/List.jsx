@@ -46,7 +46,7 @@ function List({ employees, handleEdit, handleDelete }) {
                 <td className="text-right">
                   <button
                     onClick={() => handleEdit(employee._id)}
-                    className="btn bg-blue-500 hover:bg-blue-600 text-white"
+                    className="btn bg-orange-500 hover:bg-orange-600 text-white"
                   >
                     <IconPencil />
                   </button>

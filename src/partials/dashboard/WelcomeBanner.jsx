@@ -3,7 +3,7 @@ import React from "react";
 
 function WelcomeBanner() {
   return (
-    <div className="relative bg-blue-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+    <div className="relative bg-orange-200 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}
       <div
         className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block"
@@ -15,8 +15,8 @@ function WelcomeBanner() {
             <path id="welcome-e" d="M40 0l40 80-40-12.5L0 80z" />
             <path id="welcome-g" d="M40 0l40 80-40-12.5L0 80z" />
             <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="welcome-b">
-              <stop stopColor="#E3F2FD" offset="0%" />
-              <stop stopColor="#64B5F6" offset="100%" />
+              <stop stopColor="#fcba03" offset="0%" />
+              <stop stopColor="#fc9403" offset="100%" />
             </linearGradient>
             <linearGradient
               x1="50%"
@@ -70,11 +70,13 @@ function WelcomeBanner() {
       {/* Content */}
       <div className="relative">
         <Center>
-           <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">
-          Hello, ልዳን Admin. 👋👋
-        </h1>
+          <h1 className="text-2xl md:text-3xl text-slate-800 font-bold mb-1">
+            Hello, Cafe Admin. 👋👋
+          </h1>
         </Center>
-       <Center><p>Here is what’s happening on ልዳን today:</p></Center>
+        <Center>
+          <p>Here is what’s happening on Cafe today:</p>
+        </Center>
       </div>
     </div>
   );

@@ -56,8 +56,6 @@ function Add({ setIsAdding, employees, setEmployees }) {
       });
   };
 
-  ////////////
-
   return (
     <div className="small-container">
       <br />
@@ -104,13 +102,13 @@ function Add({ setIsAdding, employees, setEmployees }) {
           </span>
           <div style={{ marginTop: "30px" }}>
             <input
-              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              className="btn bg-orange-500 hover:bg-orange-600 text-white"
               type="submit"
               value="Add"
             />
             <input
               style={{ marginLeft: "12px" }}
-              className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+              className="btn bg-red-500 hover:bg-red-600 text-white"
               type="button"
               value="Cancel"
               onClick={() => setIsAdding(false)}

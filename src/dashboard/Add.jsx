@@ -4,7 +4,7 @@ import Axios from "axios";
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
 
-function Add({ setIsAdding, employees, setEmployees }) {
+function Add({ setIsAdding, products, setProducts }) {
   const [name, setName] = useState("");
   const [typeId, setTypeId] = useState("");
   const [numberInStock, setNumberInStock] = useState(0);
@@ -23,13 +23,7 @@ function Add({ setIsAdding, employees, setEmployees }) {
       });
     }
 
-    const employee = {
-      name,
-      typeId,
-      numberInStock,
-      price,
-    };
-    const orginalData = employees;
+    const orginalData = products;
     var formdata = new FormData();
     formdata.append("name", name);
     formdata.append("typeId", typeId);
@@ -47,11 +41,11 @@ function Add({ setIsAdding, employees, setEmployees }) {
     fetch("http://localhost:5000/api/products/Add", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setEmployees(employees);
+        setProducts(products);
         setIsAdding(false);
       })
       .catch((error) => {
-        setEmployees(orginalData);
+        setProducts(orginalData);
         Swal.error("ops!", `${error.config.message}`, "please try again!");
       });
   };

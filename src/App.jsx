@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import DashboardHospital from "../src/dashboard/DashboardHospital";
-import DashboardPatient from "./Patients/DashboardPatient";
+import ProductDashboard from "./dashboard/ProductDashboard";
+import OrdersDashboard from "./Orders/OrdersDashboard";
 import AdminLogin from "./login/login";
 import "./css/style.css";
 import Choose from "./choose";
@@ -25,9 +25,9 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<AdminLogin />} />
 
-        <Route exact path="/hospital" element={<DashboardHospital />} />
+        <Route exact path="/products" element={<ProductDashboard />} />
 
-        <Route exact path="/patient" element={<DashboardPatient />} />
+        <Route exact path="/orders" element={<OrdersDashboard />} />
         <Route exact path="/report" element={<Dashboard />} />
         <Route exact path="/" element={<Choose />} />
       </Routes>

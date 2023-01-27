@@ -8,12 +8,13 @@ import Axios from "axios";
 import Filter from "../partials/actions/filterOptions";
 import Add from "./Add";
 
-function Hospital() {
-  const [employees, setEmployees] = useState({});
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+function Products() {
+  const [products, setProducts] = useState({});
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [parameter, setParameter] = useState("getAll");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let config = {
@@ -23,20 +24,21 @@ function Hospital() {
     };
     Axios.get("http://localhost:5000/api/products/getAll")
       .then(({ data }) => {
-        setEmployees(data);
+        setProducts(data);
+        setIsLoading(false);
       })
       .catch();
   });
   const handleEdit = (_id) => {
-    const [employee] = employees.filter((employee) => employee._id === _id);
+    const [product] = products.filter((product) => product._id === _id);
 
-    setSelectedEmployee(employee);
+    setSelectedProduct(product);
     setIsEditing(true);
   };
   //
 
   const handleDelete = (id) => {
-    const orginalData = employees;
+    const orginalData = products;
     Swal.fire({
       icon: "warning",
       title: "Are you sure?",
@@ -46,15 +48,15 @@ function Hospital() {
       cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.value) {
-        const [employee] = employees.filter((employee) => employee._id === id);
+        const [product] = products.filter((product) => product._id === id);
         Swal.fire({
           icon: "success",
           title: "Deleted!",
-          text: `${employee.name}'s data has been deleted.`,
+          text: `${product.name}'s data has been deleted.`,
           showConfirmButton: false,
           timer: 1500,
         });
-        setEmployees(employees.filter((employee) => employee._id !== id));
+        setProducts(products.filter((product) => product._id !== id));
 
         let config = {
           headers: {
@@ -69,37 +71,37 @@ function Hospital() {
           );
         } catch (error) {
           alert(error);
-          setEmployees(orginalData);
+          setProducts(orginalData);
         }
       }
     });
   };
-  const handleFilter = (searchData) => {
-    if (searchData === "heart") {
-      setParameter("hospital?speciality=heart");
-    } else if (searchData === "general") {
-      setParameter("hospital?speciality=general");
-    } else if (searchData === "kidney") {
-      setParameter("hospital?speciality=kidney");
-    } else {
-      setParameter("hospital");
-    }
+  // const handleFilter = (searchData) => {
+  //   if (searchData === "heart") {
+  //     setParameter("hospital?speciality=heart");
+  //   } else if (searchData === "general") {
+  //     setParameter("hospital?speciality=general");
+  //   } else if (searchData === "kidney") {
+  //     setParameter("hospital?speciality=kidney");
+  //   } else {
+  //     setParameter("hospital");
+  //   }
 
-    let config = {
-      headers: {
-        Authorization: sessionStorage.getItem("token"),
-      },
-    };
-    Axios.get("http:/localhost:5000/api/products/getAll", config).then(
-      (response) => {
-        setEmployees(response.data);
-      }
-    );
-  };
+  //   let config = {
+  //     headers: {
+  //       Authorization: sessionStorage.getItem("token"),
+  //     },
+  //   };
+  //   Axios.get("http:/localhost:5000/api/products/getAll", config).then(
+  //     (response) => {
+  //       setProducts(response.data);
+  //     }
+  //   );
+  // };
 
   return (
     <div className="container">
-      <Filter handleFilter={handleFilter} />
+      {/* <Filter handleFilter={handleFilter} /> */}
       {/* List */}
 
       {!isAdding && !isEditing && (
@@ -107,31 +109,34 @@ function Hospital() {
           <Header setIsAdding={setIsAdding} />
 
           <List
-            employees={employees}
+            products={products}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />
+          <div className="flex justify-center">
+            {isLoading && <h1>loading...</h1>}
+          </div>
         </>
       )}
 
       {/* Edit */}
       {isEditing && (
         <Edit
-          employees={employees}
-          selectedEmployee={selectedEmployee}
-          setEmployees={setEmployees}
+          products={products}
+          selectedProduct={selectedProduct}
+          setProducts={setProducts}
           setIsEditing={setIsEditing}
         />
       )}
       {isAdding && (
         <Add
           setIsAdding={setIsAdding}
-          employees={employees}
-          setEmployees={setEmployees}
+          products={products}
+          setProducts={setProducts}
         />
       )}
     </div>
   );
 }
 
-export default Hospital;
+export default Products;

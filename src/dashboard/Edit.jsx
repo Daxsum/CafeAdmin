@@ -4,16 +4,16 @@ import Swal from "sweetalert2";
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
 
-function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
-  const id = selectedEmployee._id;
+function Edit({ products, selectedProduct, setProducts, setIsEditing }) {
+  const id = selectedProduct._id;
 
-  const [name, setName] = useState(selectedEmployee.name);
-  const [typeId, setTypeId] = useState(selectedEmployee.type.id);
+  const [name, setName] = useState(selectedProduct.name);
+  const [typeId, setTypeId] = useState(selectedProduct.type.id);
 
   const [numberInStock, setNumberInStock] = useState(
-    selectedEmployee.numberInStock
+    selectedProduct.numberInStock
   );
-  const [price, setPrice] = useState(selectedEmployee.price);
+  const [price, setPrice] = useState(selectedProduct.price);
   const [file, setFile] = useState(null);
 
   const handleUpdate = (e) => {
@@ -28,7 +28,7 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       });
     }
 
-    const employee = {
+    const product = {
       id,
       name,
       typeId,
@@ -36,13 +36,13 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
       price,
     };
 
-    for (let i = 0; i < employees.length; i++) {
-      if (employees[i].id === id) {
-        employees.splice(i, 1, employee);
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].id === id) {
+        products.splice(i, 1, product);
         break;
       }
     }
-    const orginalData = employees;
+    const orginalData = products;
 
     e.preventDefault();
     var formdata = new FormData();
@@ -62,11 +62,11 @@ function Edit({ employees, selectedEmployee, setEmployees, setIsEditing }) {
     fetch(`http://localhost:5000/api/products/Update/${id}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setEmployees(employees);
+        setProducts(products);
         setIsEditing(false);
       })
       .catch((error) => {
-        setEmployees(orginalData);
+        setProducts(orginalData);
         Swal.error("ops!", `${error.config.message}`, "please try again!");
       });
   };

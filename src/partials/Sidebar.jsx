@@ -90,7 +90,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           </button> */}
 
           {/*LOGO  */}
-          <Image width="120px" height="100px" src="./newLogo.png" />
+          <Image width="120px" height="100px" src="./logo.png" />
 
           {/* Circular Button */}
           <NavLink end to="/" className="block" style={{ marginTop: "30px" }}>
@@ -103,8 +103,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   y2="108.156%"
                   id="logo-a"
                 >
-                  <stop stopColor="#E3F2FD" stopOpacity="0" offset="0%" />
-                  <stop stopColor="#E3F2FD" offset="100%" />
+                  <stop stopColor="#fc9403" stopOpacity="0" offset="0%" />
+                  <stop stopColor="#fcb100" offset="100%" />
                 </linearGradient>
                 <linearGradient
                   x1="88.638%"
@@ -113,11 +113,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   y2="100%"
                   id="logo-b"
                 >
-                  <stop stopColor="#0D47A1" stopOpacity="0" offset="0%" />
-                  <stop stopColor="#0D47A1" offset="100%" />
+                  <stop stopColor="#fc9403" stopOpacity="0" offset="0%" />
+                  <stop stopColor="#fcb100" offset="100%" />
                 </linearGradient>
               </defs>
-              <rect fill="#42A5F5" width="32" height="32" rx="16" />
+              <rect fill="#fcb100" width="32" height="32" rx="16" />
               <path
                 d="M18.277.16C26.035 1.267 32 7.938 32 16c0 8.837-7.163 16-16 16a15.937 15.937 0 01-10.426-3.863L18.277.161z"
                 fill="#42A5F5"
@@ -145,7 +145,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               >
                 •••
               </span>
-              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block text-white">
                 Pages
               </span>
             </h1>
@@ -211,7 +211,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           {/* Icon */}
                           <div className="flex shrink-0 ml-2">
                             <svg
-                              className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${
+                              className={`w-3 h-3 shrink-0 ml-1 fill-current text-white ${
                                 open && "rotate-180"
                               }`}
                               viewBox="0 0 12 12"
@@ -226,36 +226,58 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/hospital"
+                              to="/report"
+                              className="block text-white hover:text-slate-200 transition duration-150 truncate"
+                            >
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Report
+                              </span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink
+                              end
+                              to="/products"
                               className={({ isActive }) =>
-                                "block text-slate-400 hover:text-slate-200 transition duration-150 truncate " +
-                                (isActive ? "!text-indigo-500" : "")
+                                "block text-white hover:text-slate-200 transition duration-150 truncate " +
+                                (isActive ? "!text-orange-500" : "")
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Hospitals
+                                Products
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/patient"
-                              className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate"
+                              to="/orders"
+                              className="block text-white hover:text-slate-200 transition duration-150 truncate"
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Patients
+                                Orders
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/report"
-                              className="block text-slate-400 hover:text-slate-200 transition duration-150 truncate"
+                              to="/users"
+                              className="block text-white hover:text-slate-200 transition duration-150 truncate"
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Monthly Report
+                                Users
+                              </span>
+                            </NavLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <NavLink
+                              end
+                              to="/types"
+                              className="block text-white hover:text-slate-200 transition duration-150 truncate"
+                            >
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                types
                               </span>
                             </NavLink>
                           </li>

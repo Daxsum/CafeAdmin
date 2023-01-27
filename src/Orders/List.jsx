@@ -1,7 +1,7 @@
 import React from "react";
 import { IconTrash, IconPencil } from "@tabler/icons";
 
-function List({ products, handleEdit, handleDelete }) {
+function List({ orders, handleEdit }) {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -15,9 +15,10 @@ function List({ products, handleEdit, handleDelete }) {
           <tr>
             <th>No.</th>
             <th>Name</th>
-            <th>Number In Stock</th>
-            <th>Price</th>
             <th>Type</th>
+            <th>Who</th>
+            <th>Quantity</th>
+            <th>Status</th>
             <th></th>
             <th colSpan={2} className="text-center">
               Actions
@@ -25,45 +26,47 @@ function List({ products, handleEdit, handleDelete }) {
           </tr>
         </thead>
         <tbody>
-          {products.length > 0 ? (
-            products.map((product, i) => (
-              <tr key={product._id}>
+          {orders.length > 0 ? (
+            orders.map((order, i) => (
+              <tr key={order._id}>
                 <td>{i + 1}</td>
-                <td>{product.name}</td>
-                <td>{product.numberInStock}</td>
-                <td>{product.price}</td>
-                <td>{product.type.name}</td>
-
+                <td>{order.item.name}</td>
+                <td>{order.item.type.name}</td>
+                <td>{order.who.userName}</td>
+                <td>{order.quantity}</td>
+                <td>
+                  {order.isActive === true ? (
+                    <span className="bg-green-600 rounded-md p-2 text-white">
+                      Active
+                    </span>
+                  ) : (
+                    <span className="bg-red-600 rounded-md p-2 text-white">
+                      Served
+                    </span>
+                  )}
+                </td>
                 <td>
                   {" "}
                   <img
                     className="h-40 object-cover rounded-xl"
-                    src={`//localhost:5000/${product.filePath}`}
+                    src={`//localhost:5000/${order.item.filePath}`}
                     alt=""
                   />
                 </td>
 
                 <td className="text-right">
                   <button
-                    onClick={() => handleEdit(product._id)}
+                    onClick={() => handleEdit(order._id)}
                     className="btn bg-orange-500 hover:bg-orange-600 text-white"
                   >
                     <IconPencil />
-                  </button>
-                </td>
-                <td className="text-left">
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="btn bg-red-500 hover:bg-red-600 text-white"
-                  >
-                    <IconTrash />
                   </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={7}>No food available</td>
+              <td colSpan={7}>No Orders</td>
             </tr>
           )}
         </tbody>

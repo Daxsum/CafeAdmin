@@ -6,10 +6,10 @@ import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 import FilterButton from "../partials/actions/FilterButton";
 import Datepicker from "../partials/actions/Datepicker";
 import Banner from "../partials/Banner";
-import Hospital from ".";
+import Products from ".";
 import { BackgroundImage } from "@mantine/core";
 
-function DashboardHospital() {
+function ProductDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -47,7 +47,7 @@ function DashboardHospital() {
               {/* Cards */}
 
               <div className="grid  gap-6">
-                <Hospital />
+                <Products />
               </div>
             </div>
           </main>
@@ -59,4 +59,4 @@ function DashboardHospital() {
   );
 }
 
-export default DashboardHospital;
+export default ProductDashboard;

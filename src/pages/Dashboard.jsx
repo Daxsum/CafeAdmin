@@ -23,7 +23,7 @@ import DashboardCard11 from "../partials/dashboard/DashboardCard11";
 import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 import DashboardCard13 from "../partials/dashboard/DashboardCard13";
 import Banner from "../partials/Banner";
-import DashboardHospital from "../dashboard/DashboardHospital";
+import DashboardHospital from "../dashboard/ProductDashboard";
 import { BackgroundImage } from "@mantine/core";
 import Axios from "axios";
 const currrentURL = window.location.href;

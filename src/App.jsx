@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import TypesDashboard from "./types/TypesDashboard";
 import ProductDashboard from "./dashboard/ProductDashboard";
 import OrdersDashboard from "./Orders/OrdersDashboard";
 import AdminLogin from "./login/login";
 import "./css/style.css";
 import Choose from "./choose";
-
 import "./charts/ChartjsConfig";
 
 // Import pages
@@ -24,9 +24,8 @@ function App() {
     <>
       <Routes>
         <Route exact path="/login" element={<AdminLogin />} />
-
         <Route exact path="/products" element={<ProductDashboard />} />
-
+        <Route exact path="/types" element={<TypesDashboard />} />
         <Route exact path="/orders" element={<OrdersDashboard />} />
         <Route exact path="/report" element={<Dashboard />} />
         <Route exact path="/" element={<Choose />} />

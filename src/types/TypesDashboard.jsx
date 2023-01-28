@@ -6,7 +6,7 @@ import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
 import FilterButton from "../partials/actions/FilterButton";
 import Datepicker from "../partials/actions/Datepicker";
 import Banner from "../partials/Banner";
-import Products from ".";
+import Types from ".";
 import { BackgroundImage } from "@mantine/core";
 
 function TypesDashboard() {
@@ -47,7 +47,7 @@ function TypesDashboard() {
               {/* Cards */}
 
               <div className="grid  gap-6">
-                <Products />
+                <Types />
               </div>
             </div>
           </main>

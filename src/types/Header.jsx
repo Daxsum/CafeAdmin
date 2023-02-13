@@ -10,7 +10,7 @@ function Header({ setIsAdding }) {
     <header>
       <div style={{ display: "flex" }}>
         <h1 style={{ color: "#1976D2", fontWeight: "100" }}>
-          Foods List Management{" "}
+          Catagory List Management{" "}
         </h1>
         <Group position="right">
           <button

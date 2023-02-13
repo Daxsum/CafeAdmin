@@ -42,7 +42,10 @@ function AdminLogin() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/api/login", { userName, password })
+      .post("https://khcafebackend-api.onrender.com/api/login", {
+        userName,
+        password,
+      })
       .then(function (response) {
         sessionStorage.setItem("token", response.data);
         navigate("/report");

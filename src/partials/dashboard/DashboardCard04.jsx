@@ -39,10 +39,8 @@ function DashboardCard04(set) {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-lg rounded-sm  border-slate-200">
       <header className="px-5 py-4 border-b border-slate-100">
-        <h2 className="font-semibold text-slate-800">Donation</h2>
-        <h6 className="font-light text-slate-800">
-          With Subscription VS Without Subscription
-        </h6>
+        <h2 className="font-semibold text-slate-800">Food Selld</h2>
+        <h6 className="font-light text-slate-800">Fasting VS Non Fasting</h6>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}

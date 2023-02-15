@@ -38,7 +38,7 @@ function DashboardCard01({ set }) {
       "01-01-2023",
     ],
     datasets: [
-      // blue line
+      // orange line
       {
         data: [
           732, 610, 610, 504, 504, 504, 349, 349, 504, 342, 504, 610, 391, 192,
@@ -46,14 +46,14 @@ function DashboardCard01({ set }) {
         ],
         fill: true,
         backgroundColor: `rgba(${hexToRGB(
-          tailwindConfig().theme.colors.blue[500]
+          tailwindConfig().theme.colors.orange[500]
         )}, 0.08)`,
-        borderColor: tailwindConfig().theme.colors.blue[500],
+        borderColor: tailwindConfig().theme.colors.orange[500],
         borderWidth: 2,
         tension: 0,
         pointRadius: 0,
         pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig().theme.colors.blue[500],
+        pointBackgroundColor: tailwindConfig().theme.colors.orange[500],
         clip: 20,
       },
       // Gray line
@@ -108,17 +108,17 @@ function DashboardCard01({ set }) {
           </EditMenu> */}
         </header>
         <h2 className="text-lg font-semibold text-slate-800 mb-2">
-          Total Donation
+          Total Sell
         </h2>
         <div className="text-xs font-semibold text-slate-400 uppercase mb-1">
           Received
         </div>
         <div className="flex items-start">
           <div className="text-3xl font-bold text-slate-800 mr-2">
-            24,780 Birr
+            242,780 Birr
           </div>
           <div className="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">
-            +29%
+            +29% than Yesterday
           </div>
         </div>
       </div>

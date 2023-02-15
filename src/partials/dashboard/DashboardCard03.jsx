@@ -108,14 +108,14 @@ function DashboardCard03(set) {
           </EditMenu> */}
         </header>
         <h2 className="text-lg font-semibold text-slate-800 mb-2">
-          Subscription
+          Weekly sells
         </h2>
         <div className="text-xs font-semibold text-slate-400 uppercase mb-1">
           Donor
         </div>
         <div className="flex items-start">
           <div className="text-3xl font-bold text-slate-800 mr-2">
-            9,962 Birr
+            29,962 Birr
           </div>
           <div className="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">
             +49%

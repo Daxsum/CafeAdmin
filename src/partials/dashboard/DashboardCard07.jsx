@@ -4,7 +4,7 @@ function DashboardCard07(set) {
   return (
     <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-slate-200">
       <header className="px-5 py-4 border-b border-slate-100">
-        <h2 className="font-semibold text-slate-800">Top Donations</h2>
+        <h2 className="font-semibold text-slate-800">Top Products</h2>
       </header>
       <div className="p-3">
         {/* Table */}
@@ -17,7 +17,7 @@ function DashboardCard07(set) {
                   <div className="font-semibold text-left">Name</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">badge</div>
+                  <div className="font-semibold text-center">Type</div>
                 </th>
                 <th className="p-2">
                   <div className="font-semibold text-center">Amout</div>
@@ -48,11 +48,11 @@ function DashboardCard07(set) {
                         fill="#FFF"
                       />
                     </svg>
-                    <div className="text-slate-800">kalab</div>
+                    <div className="text-slate-800">mahberawi</div>
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">Gold</div>
+                  <div className="text-center">fasting</div>
                 </td>
                 <td className="p-2">
                   <div className="text-center text-green-500">$3,877</div>
@@ -81,11 +81,11 @@ function DashboardCard07(set) {
                         fillRule="nonzero"
                       />
                     </svg>
-                    <div className="text-slate-800">mickias</div>
+                    <div className="text-slate-800">burger</div>
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">Gold</div>
+                  <div className="text-center">meal</div>
                 </td>
                 <td className="p-2">
                   <div className="text-center text-green-500">$3,426</div>
@@ -114,11 +114,11 @@ function DashboardCard07(set) {
                         fillRule="nonzero"
                       />
                     </svg>
-                    <div className="text-slate-800">betty</div>
+                    <div className="text-slate-800">pizza</div>
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">Silver</div>
+                  <div className="text-center">meal</div>
                 </td>
                 <td className="p-2">
                   <div className="text-center text-green-500">$2,444</div>
@@ -147,11 +147,11 @@ function DashboardCard07(set) {
                         fillRule="nonzero"
                       />
                     </svg>
-                    <div className="text-slate-800">emanda</div>
+                    <div className="text-slate-800">lazagna</div>
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">Silver</div>
+                  <div className="text-center">meal</div>
                 </td>
                 <td className="p-2">
                   <div className="text-center text-green-500">$2,236</div>
@@ -179,11 +179,11 @@ function DashboardCard07(set) {
                         fill="#E6ECF4"
                       />
                     </svg>
-                    <div className="text-slate-800">yohaness</div>
+                    <div className="text-slate-800">coca</div>
                   </div>
                 </td>
                 <td className="p-2">
-                  <div className="text-center">Bronze</div>
+                  <div className="text-center">drink</div>
                 </td>
                 <td className="p-2">
                   <div className="text-center text-green-500">$2,034</div>

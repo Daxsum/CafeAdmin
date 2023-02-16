@@ -9,7 +9,7 @@ const DropDown = ({ typeId, setTypeId }) => {
         Authorization: sessionStorage.getItem("token"),
       },
     };
-    Axios.get("http://localhost:5000/api/types/getAll")
+    Axios.get(`${import.meta.env.VITE_API}/api/types/getAll`)
       .then(({ data }) => {
         setItems(data);
       })

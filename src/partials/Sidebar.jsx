@@ -183,7 +183,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 className={`fill-current text-slate-400 ${
                                   (pathname === "/" ||
                                     pathname.includes("dashboard")) &&
-                                  "!text-indigo-500"
+                                  "!text-orange-500"
                                 }`}
                                 d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z"
                               />
@@ -191,7 +191,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                                 className={`fill-current text-slate-600 ${
                                   (pathname === "/" ||
                                     pathname.includes("dashboard")) &&
-                                  "text-indigo-600"
+                                  "text-orange-600"
                                 }`}
                                 d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z"
                               />

@@ -2,7 +2,8 @@
   "name": "mosaic-react",
   "version": "0.1.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "env-cmd -e development vite",
+    "prod": "env-cmd -e production vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -23,6 +24,7 @@
     "bootstrap": "^5.2.2",
     "chart.js": "^3.8.0",
     "chartjs-adapter-moment": "^1.0.0",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.9",
     "framer-motion": "^7.6.7",
     "joi-browser": "^13.4.0",

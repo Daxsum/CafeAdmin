@@ -22,7 +22,7 @@ function Products() {
         Authorization: sessionStorage.getItem("token"),
       },
     };
-    Axios.get("http://localhost:5000/api/products/getAll")
+    Axios.get(`${import.meta.env.VITE_API}/api/products/getAll`)
       .then(({ data }) => {
         setProducts(data);
         setIsLoading(false);
@@ -66,7 +66,7 @@ function Products() {
 
         try {
           Axios.delete(
-            `http://localhost:5000/api/products/Delete/${id}`,
+            `${import.meta.env.VITE_API}/api/products/Delete/${id}`,
             config
           );
         } catch (error) {

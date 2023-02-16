@@ -28,42 +28,26 @@ import { BackgroundImage } from "@mantine/core";
 import Axios from "axios";
 const currrentURL = window.location.href;
 function Dashboard() {
-  const [value, setValue] = useState([
-    { id: 1, name: "amanuel", status: "Gold", amount: "20000" },
-    { id: 2, name: "kalab", status: "Silver", amount: "40000" },
-    { id: 3, name: "amanuel", status: "Gold", amount: "50000" },
-    { id: 4, name: "adhanom", status: "Bronze", amount: "70000" },
-    { id: 5, name: "mickyas", status: "Bronze", amount: "50000" },
-    { id: 6, name: "betty", status: "Gold", amount: "20000" },
-    { id: 7, name: "emanda", status: "Bronze", amount: "5000" },
-    { id: 8, name: "amanuel", status: "Gold", amount: "7000" },
-    { id: 9, name: "amanuel", status: "Gold", amount: "40000" },
-    { id: 10, name: "kalab", status: "Silver", amount: "5000" },
-    { id: 11, name: "emanda", status: "Bronze", amount: "5000" },
-    { id: 12, name: "amanuel", status: "Gold", amount: "7000" },
-    { id: 13, name: "emanda", status: "Bronze", amount: "800" },
-    { id: 14, name: "amanuel", status: "Gold", amount: "800" },
-    { id: 15, name: "amanuel", status: "Gold", amount: "80" },
-  ]);
+  const [value, setValue] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [detail1, setDetail1] = useState(false);
 
-  // useEffect(() => {
-  //   let config = {
-  //     headers: {
-  //       Authorization: "Bearer " + sessionStorage.getItem("token"),
-  //     },
-  //   };
+  useEffect(() => {
+    let config = {
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+    };
 
-  //   Axios.get(`http://localhost:5000/api/users/report/donation`, config).then(
-  //     (response) => {
-  //       // console.log(response.data.data.data.userId.firstName);
-  //       setValue(response.data);
-  //       console.log(response);
-  //       window.location.reload(false);
-  //     }
-  //   );
-  // }, []);
+    Axios.get(`${import.meta.env.VITE_API}/api/products/getAll`, config).then(
+      (response) => {
+        // console.log(response.data.data.data.userId.firstName);
+        setValue(response.data);
+        console.log(response);
+        // window.location.reload(false);
+      }
+    );
+  });
   const rows = value.map((val) => (
     <tr key={val.id}>
       <td>{val.name}</td>

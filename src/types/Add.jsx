@@ -27,7 +27,7 @@ function Add({ setIsAdding, types, setTypes }) {
         },
       };
       await axios.post(
-        "http://localhost:5000/api/types/Add",
+        `${import.meta.env.VITE_API}/api/types/Add`,
         {
           name: name,
         },

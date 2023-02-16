@@ -59,7 +59,10 @@ function Edit({ products, selectedProduct, setProducts, setIsEditing }) {
       body: formdata,
       // redirect: "follow",
     };
-    fetch(`http://localhost:5000/api/products/Update/${id}`, requestOptions)
+    fetch(
+      `${import.meta.env.VITE_API}/api/products/Update/${id}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         setProducts(products);

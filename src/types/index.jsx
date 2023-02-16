@@ -22,7 +22,7 @@ function Types() {
         Authorization: sessionStorage.getItem("token"),
       },
     };
-    Axios.get("http://localhost:5000/api/types/getAll")
+    Axios.get(`${import.meta.env.VITE_API}/api/types/getAll`)
       .then(({ data }) => {
         setTypes(data);
         setIsLoading(false);
@@ -64,7 +64,10 @@ function Types() {
         };
 
         try {
-          Axios.delete(`http://localhost:5000/api/types/Delete/${id}`, config);
+          Axios.delete(
+            `${import.meta.env.VITE_API}/api/types/Delete/${id}`,
+            config
+          );
         } catch (error) {
           alert(error);
           setProducts(orginalData);

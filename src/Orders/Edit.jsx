@@ -40,7 +40,11 @@ function Edit({ orders, selectedProduct, setOrders, setIsEditing }) {
         },
       };
 
-      Axios.put(`http://localhost:5000/api/order/Update/${id}`, order, config);
+      Axios.put(
+        `${import.meta.env.VITE_API}/api/order/Update/${id}`,
+        order,
+        config
+      );
       setOrders(orders);
       setIsEditing(false);
       Swal.fire({

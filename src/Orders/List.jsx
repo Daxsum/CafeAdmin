@@ -49,7 +49,7 @@ function List({ orders, handleEdit }) {
                   {" "}
                   <img
                     className="h-40 object-cover rounded-xl"
-                    src={`//localhost:5000/${order.item.filePath}`}
+                    src={`${import.meta.env.VITE_API}/${order.item.filePath}`}
                     alt=""
                   />
                 </td>

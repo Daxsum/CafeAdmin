@@ -32,7 +32,7 @@ function Add({ setIsAdding, users, setUsers }) {
         },
       };
       await axios.post(
-        "http://localhost:5000/api/users/signUp",
+        `${import.meta.env.VITE_API}/api/users/signUp`,
         {
           firstName: firstName,
           lastName: lastName,

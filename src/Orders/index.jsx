@@ -22,7 +22,7 @@ function Orders() {
         Authorization: sessionStorage.getItem("token"),
       },
     };
-    Axios.get("http://localhost:5000/api/order/getAll", config)
+    Axios.get(`${import.meta.env.VITE_API}/api/order/getAll`, config)
       .then(({ data }) => {
         setOrders(data);
         setIsLoading(false);

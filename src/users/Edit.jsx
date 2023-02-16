@@ -53,7 +53,7 @@ function Edit({ users, selectedUser, setUsers, setIsEditing }) {
         },
       };
       await axios.put(
-        `http://localhost:5000/api/users/Update/${id}`,
+        `${import.meta.env.VITE_API}/api/users/Update/${id}`,
         {
           firstName: firstName,
           lastName: lastName,

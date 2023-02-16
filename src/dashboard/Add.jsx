@@ -38,7 +38,7 @@ function Add({ setIsAdding, products, setProducts }) {
       body: formdata,
       // redirect: "follow",
     };
-    fetch("http://localhost:5000/api/products/Add", requestOptions)
+    fetch(`${import.meta.env.VITE_API}/api/products/Add`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setProducts(products);

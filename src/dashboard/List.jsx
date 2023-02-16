@@ -38,7 +38,7 @@ function List({ products, handleEdit, handleDelete }) {
                   {" "}
                   <img
                     className="h-40 object-cover rounded-xl"
-                    src={`//localhost:5000/${product.filePath}`}
+                    src={`${import.meta.env.VITE_API}/${product.filePath}`}
                     alt=""
                   />
                 </td>

@@ -22,7 +22,7 @@ function Users() {
         Authorization: sessionStorage.getItem("token"),
       },
     };
-    Axios.get("http://localhost:5000/api/users/getAll", config)
+    Axios.get(`${import.meta.env.VITE_API}/api/users/getAll`, config)
       .then(({ data }) => {
         setUsers(data);
         setIsLoading(false);
@@ -65,7 +65,10 @@ function Users() {
         };
 
         try {
-          Axios.delete(`http://localhost:5000/api/users/Delete/${id}`, config);
+          Axios.delete(
+            `${import.meta.env.VITE_API}/api/users/Delete/${id}`,
+            config
+          );
         } catch (error) {
           alert(error);
           setUsers(orginalData);

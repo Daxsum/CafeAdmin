@@ -41,7 +41,7 @@ function Edit({ types, selectedType, setTypes, setIsEditing }) {
         },
       };
       await axios.put(
-        `http://localhost:5000/api/types/Update/${id}`,
+        `${import.meta.env.VITE_API}/api/types/Update/${id}`,
         {
           name: name,
         },

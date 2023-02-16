@@ -23,7 +23,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         KH
       </Link>{" "}
       {new Date().getFullYear()}
@@ -42,7 +42,7 @@ function AdminLogin() {
     e.preventDefault();
 
     axios
-      .post("https://khcafebackend-api.onrender.com/api/login", {
+      .post(`${import.meta.env.VITE_API}/api/login`, {
         userName,
         password,
       })

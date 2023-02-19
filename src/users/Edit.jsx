@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import axios from "axios";
 import { Card } from "@mantine/core";
 import DropDown from "./dropdown";
@@ -18,12 +18,7 @@ function Edit({ users, selectedUser, setUsers, setIsEditing }) {
     e.preventDefault();
 
     if (!firstName || !lastName || !userName || !role || !password) {
-      return Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "All fields are required.",
-        showConfirmButton: true,
-      });
+      return swal("Error!", "All fields are required.", "error");
     }
 
     const user = {
@@ -68,7 +63,7 @@ function Edit({ users, selectedUser, setUsers, setIsEditing }) {
       setIsEditing(false);
     } catch (error) {
       setUsers(orginalData);
-      Swal.fire("ops!", "please try again!");
+      swal("ops!", "please try again!", "error");
     }
   };
 

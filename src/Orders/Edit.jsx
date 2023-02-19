@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import Axios from "axios";
 import { Card } from "@mantine/core";
 
@@ -47,15 +47,13 @@ function Edit({ orders, selectedProduct, setOrders, setIsEditing }) {
       );
       setOrders(orders);
       setIsEditing(false);
-      Swal.fire({
-        icon: "success",
-        title: "Updated!",
-        text: ` ${order.isActive}'s data has been deactivated.`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      swal(
+        "Updated!",
+        ` ${order.isActive}'s data has been deactivated.`,
+        "success"
+      );
     } catch (error) {
-      alert(error);
+      swal("ops!", "something is wrong!", "error");
       setOrders(orginalData);
     }
   };

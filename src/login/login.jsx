@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { BackgroundImage, Card, Container } from "@mantine/core";
-
+import swal from "sweetalert";
 function Copyright(props) {
   return (
     <Typography
@@ -49,9 +49,11 @@ function AdminLogin() {
       .then(function (response) {
         sessionStorage.setItem("token", response.data);
         navigate("/report");
+        swal("Good job!", "You've successfuly loged in!", "success");
         console.log(response.data);
       })
       .catch(function (error) {
+        swal("ops!", "something is wrong!", "error");
         console.log(error);
       });
     console.log({

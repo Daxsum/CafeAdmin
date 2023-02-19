@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import "./list.css";
 import Header from "./Header";
 import List from "./List";
@@ -7,6 +7,7 @@ import Edit from "./Edit";
 import Axios from "axios";
 import Filter from "../partials/actions/filterOptions";
 import Add from "./Add";
+import Swal from "sweetalert2";
 
 function Users() {
   const [users, setUsers] = useState({});
@@ -40,22 +41,21 @@ function Users() {
   const handleDelete = (id) => {
     const orginalData = users;
     Swal.fire({
-      icon: "warning",
       title: "Are you sure?",
       text: "You won't be able to revert this!",
+      icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         const [user] = users.filter((user) => user._id === id);
-        Swal.fire({
-          icon: "success",
-          title: "Deleted!",
-          text: `${user.userName}'s data has been deleted.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        swal(
+          "Deleted!",
+          `${user.userName}'s data has been deleted.`,
+          "success"
+        );
         setUsers(users.filter((user) => user._id !== id));
 
         let config = {
@@ -70,7 +70,7 @@ function Users() {
             config
           );
         } catch (error) {
-          alert(error);
+          swal("ops!", "please try again!", "error");
           setUsers(orginalData);
         }
       }

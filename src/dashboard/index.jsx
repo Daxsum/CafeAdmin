@@ -7,7 +7,7 @@ import Edit from "./Edit";
 import Axios from "axios";
 import Filter from "../partials/actions/filterOptions";
 import Add from "./Add";
-
+import swal from "sweetalert";
 function Products() {
   const [products, setProducts] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -40,22 +40,17 @@ function Products() {
   const handleDelete = (id) => {
     const orginalData = products;
     Swal.fire({
-      icon: "warning",
       title: "Are you sure?",
       text: "You won't be able to revert this!",
+      icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         const [product] = products.filter((product) => product._id === id);
-        Swal.fire({
-          icon: "success",
-          title: "Deleted!",
-          text: `${product.name}'s data has been deleted.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
+
         setProducts(products.filter((product) => product._id !== id));
 
         let config = {
@@ -70,9 +65,14 @@ function Products() {
             config
           );
         } catch (error) {
-          alert(error);
+          swal(
+            "Network Error!",
+            "please check your network and try again!",
+            "error"
+          );
           setProducts(orginalData);
         }
+        swal("Deleted!", `${product.name}'s data has been deleted.`, "success");
       }
     });
   };

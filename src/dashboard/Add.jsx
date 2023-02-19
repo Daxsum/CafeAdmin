@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import Swal from "sweetalert2";
+
 import Axios from "axios";
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
-
+import swal from "sweetalert";
 function Add({ setIsAdding, products, setProducts }) {
   const [name, setName] = useState("");
   const [typeId, setTypeId] = useState("");
@@ -15,12 +15,7 @@ function Add({ setIsAdding, products, setProducts }) {
     e.preventDefault();
 
     if (!name || !price || !numberInStock) {
-      return Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "All fields are required.",
-        showConfirmButton: true,
-      });
+      return swal("ops!", "All fields are required!", "error");
     }
 
     const orginalData = products;
@@ -43,10 +38,11 @@ function Add({ setIsAdding, products, setProducts }) {
       .then((result) => {
         setProducts(products);
         setIsAdding(false);
+        swal("Good Job!", "Product Added Successfully!", "success");
       })
       .catch((error) => {
         setProducts(orginalData);
-        Swal.error("ops!", `${error.config.message}`, "please try again!");
+        swal("ops!", `${error.config.message}`, "please try again!");
       });
   };
 

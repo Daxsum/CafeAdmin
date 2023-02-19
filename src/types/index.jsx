@@ -39,22 +39,17 @@ function Types() {
   const handleDelete = (id) => {
     const orginalData = types;
     Swal.fire({
-      icon: "warning",
       title: "Are you sure?",
       text: "You won't be able to revert this!",
+      icon: "warning",
       showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
     }).then((result) => {
-      if (result.value) {
+      if (result.isConfirmed) {
         const [type] = types.filter((type) => type._id === id);
-        Swal.fire({
-          icon: "success",
-          title: "Deleted!",
-          text: `${type.name}'s data has been deleted.`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        swal("Deleted!", "the item is deleted!", "success");
         setTypes(types.filter((type) => type._id !== id));
 
         let config = {
@@ -69,7 +64,7 @@ function Types() {
             config
           );
         } catch (error) {
-          alert(error);
+          swal("ops!", "please try again!", "error");
           setProducts(orginalData);
         }
       }

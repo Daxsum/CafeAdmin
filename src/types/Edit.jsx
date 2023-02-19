@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import axios from "axios";
 
 import { Card } from "@mantine/core";
@@ -14,12 +14,7 @@ function Edit({ types, selectedType, setTypes, setIsEditing }) {
     e.preventDefault();
 
     if (!name) {
-      return Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "All fields are required.",
-        showConfirmButton: true,
-      });
+      return swal("ops!", "empity values are not accepted!", "error");
     }
 
     const type = {
@@ -51,7 +46,7 @@ function Edit({ types, selectedType, setTypes, setIsEditing }) {
       setIsEditing(false);
     } catch (error) {
       setTypes(orginalData);
-      Swal.fire("ops!", "please try again!");
+      swal("ops!", "please try again!", "error");
     }
   };
 

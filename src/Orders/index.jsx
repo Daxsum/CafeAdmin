@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 import Header from "./Header";
 import List from "./List";

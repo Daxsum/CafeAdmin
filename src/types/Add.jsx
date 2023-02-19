@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Swal from "sweetalert2";
+import swal from "sweetalert";
 import axios from "axios";
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
@@ -11,12 +11,7 @@ function Add({ setIsAdding, types, setTypes }) {
     e.preventDefault();
 
     if (!name) {
-      return Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "All fields are required.",
-        showConfirmButton: true,
-      });
+      return swal("ops!", "empity values are not accepted!", "error");
     }
 
     const orginalData = types;
@@ -37,7 +32,7 @@ function Add({ setIsAdding, types, setTypes }) {
       setIsAdding(false);
     } catch (error) {
       setTypes(orginalData);
-      Swal.fire("ops!", "please try again!");
+      swal("ops!", "please try again!", "error");
     }
   };
 

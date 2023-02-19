@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
-
+import swal from "sweetalert";
 import { Card } from "@mantine/core";
 import DropDown from "../comm/dropdown";
 
@@ -20,12 +19,7 @@ function Edit({ products, selectedProduct, setProducts, setIsEditing }) {
     e.preventDefault();
 
     if (!name || !price || !numberInStock) {
-      return Swal.fire({
-        icon: "error",
-        title: "Error!",
-        text: "All fields are required.",
-        showConfirmButton: true,
-      });
+      return swal("ops!", "All fields are required!", "error");
     }
 
     const product = {
@@ -70,7 +64,7 @@ function Edit({ products, selectedProduct, setProducts, setIsEditing }) {
       })
       .catch((error) => {
         setProducts(orginalData);
-        Swal.error("ops!", `${error.config.message}`, "please try again!");
+        swal("ops!", `${error.config.message}`, "please try again!");
       });
   };
 

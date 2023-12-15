@@ -4,7 +4,8 @@ import { BackgroundImage, Box, Center, Container, Image } from "@mantine/core";
 
 const Choose = () => {
   return (
-    <Container style={{ margin: 0, maxWidth: "100%", maxHeight: "100%" }}>
+    <div  style={{ backgroundImage:"./background.png",width:screen,height:screen}}>
+ <Container style={{ backgroundImage:"./background.png", margin: 0, maxWidth: "100%", maxHeight: "100%" }}>
       <BackgroundImage src="./background.png" radius="sm">
         <Center style={{ margin: 0 }}>
           <Image
@@ -30,7 +31,7 @@ const Choose = () => {
               padding: "20px",
             }}
           >
-            Click this to Admin
+            Click this For Admin
           </Link>
 
           <br />
@@ -43,6 +44,8 @@ const Choose = () => {
         </Center>
       </BackgroundImage>
     </Container>
+    </div>
+   
   );
 };
 

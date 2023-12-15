@@ -115,7 +115,7 @@ function DashboardCard01({ set }) {
         </div>
         <div className="flex items-start">
           <div className="text-3xl font-bold text-slate-800 mr-2">
-            242,780 Birr
+            42,780 Birr
           </div>
           <div className="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">
             +29% than Yesterday
